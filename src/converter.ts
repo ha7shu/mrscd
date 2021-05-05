@@ -74,10 +74,10 @@ export const encode = (input: string): string => {
       toPush[item] = codes[toPush[item]];
     }
 
-    toReturn.push(toPush.join("   "));
+    toReturn.push(toPush.join("  "));
   }
 
-  return toReturn.join("      /      ");
+  return toReturn.join("   /   ");
 };
 
 export const decode = (input: string) => {

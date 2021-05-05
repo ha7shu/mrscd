@@ -20,7 +20,10 @@ composer.on("inline_query", async (ctx) => {
           id: v4(),
           type: "article",
           title: "Converted Morse",
-          input_message_content: { message_text: result },
+          input_message_content: {
+            message_text: result,
+            entities: [{ type: "code", offset: 0, length: result.length }],
+          },
         },
       ],
       { cache_time: 0 }
