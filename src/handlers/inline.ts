@@ -16,7 +16,7 @@ composer.on("inline_query", async (ctx) => {
       {
         id: v4(),
         type: "article",
-        title: "Converted text",
+        title: "Converted Morse",
         input_message_content: { message_text: encode(input) },
       },
     ]);
@@ -25,7 +25,7 @@ composer.on("inline_query", async (ctx) => {
       {
         id: v4(),
         type: "article",
-        title: "Converted morse",
+        title: "Converted text",
         input_message_content: { message_text: decode(input) },
       },
     ]);
