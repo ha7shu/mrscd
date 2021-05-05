@@ -12,23 +12,29 @@ composer.on("inline_query", async (ctx) => {
     );
   if (!input) return;
   else if (method == "m" || method == "mrs" || method == "morse") {
-    await ctx.answerInlineQuery([
-      {
-        id: v4(),
-        type: "article",
-        title: "Converted Morse",
-        input_message_content: { message_text: encode(input) },
-      },
-    ]);
+    await ctx.answerInlineQuery(
+      [
+        {
+          id: v4(),
+          type: "article",
+          title: "Converted Morse",
+          input_message_content: { message_text: encode(input) },
+        },
+      ],
+      { cache_time: 0 }
+    );
   } else if (method == "t" || method == "txt" || method == "text") {
-    await ctx.answerInlineQuery([
-      {
-        id: v4(),
-        type: "article",
-        title: "Converted text",
-        input_message_content: { message_text: decode(input) },
-      },
-    ]);
+    await ctx.answerInlineQuery(
+      [
+        {
+          id: v4(),
+          type: "article",
+          title: "Converted text",
+          input_message_content: { message_text: decode(input) },
+        },
+      ],
+      { cache_time: 0 }
+    );
   }
 });
 
