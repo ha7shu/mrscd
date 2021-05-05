@@ -1,8 +1,8 @@
-interface Codes {
+interface keyable {
   [key: string]: string;
 }
 
-const codes: Codes = {
+const codes: keyable = {
   a: ".-",
   b: "-...",
   c: "-.-.",
@@ -56,21 +56,33 @@ const codes: Codes = {
   "/": "-..-.",
 };
 
-export const encode = (text: string) => {
-  let toReturn: string[] = [];
-  for (let i = 0; i < text.split(" ").length; i++) {
-    let toPush: string[] = text.split(" ")[i].split("");
-    for (const item in toPush) toPush[item] = codes[toPush[item]];
+const letters: keyable = { "/": " ", "|": " " };
+for (const code in codes) letters[codes[code]] = code;
+
+export const encode = (input: string): string => {
+  const toReturn: string[] = [];
+  const text = input
+    .toLowerCase()
+    .split(" ")
+    .filter((el) => el);
+
+  for (let i = 0; i < text.length; i++) {
+    let toPush: string[] = text[i].split("");
+
+    for (const item in toPush) {
+      if (!(toPush[item] in codes)) return "";
+      toPush[item] = codes[toPush[item]];
+    }
+
     toReturn.push(toPush.join("   "));
   }
+
   return toReturn.join("      /      ");
 };
 
-export const decode = (morse: string) => {
-  const _codes: Codes = { "/": " ", "|": " " },
-    toReturn: string[] = morse.split(" ");
-  for (const code in codes) _codes[codes[code]] = code;
+export const decode = (input: string) => {
+  const toReturn: string[] = input.split(" ").filter((el) => el);
   for (const item in toReturn)
-    if (_codes[toReturn[item]]) toReturn[item] = _codes[toReturn[item]];
+    if (letters[toReturn[item]]) toReturn[item] = letters[toReturn[item]];
   return toReturn.join("");
 };

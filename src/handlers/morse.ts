@@ -17,7 +17,9 @@ composer.command("morse", async (ctx) => {
   }
 
   if (!input) return;
-  await ctx.reply(encode(input));
+  const result = encode(input);
+  if (!result) return;
+  await ctx.reply(result);
 });
 
 export default composer;

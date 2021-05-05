@@ -12,13 +12,15 @@ composer.on("inline_query", async (ctx) => {
     );
   if (!input) return;
   else if (method == "m" || method == "mrs" || method == "morse") {
+    const result = encode(input);
+    if (!result) return;
     await ctx.answerInlineQuery(
       [
         {
           id: v4(),
           type: "article",
           title: "Converted Morse",
-          input_message_content: { message_text: encode(input) },
+          input_message_content: { message_text: result },
         },
       ],
       { cache_time: 0 }
