@@ -1,4 +1,4 @@
-import { Composer } from "grammy";
+import { Composer, InlineKeyboard } from "grammy";
 import { encode } from "../converter";
 
 const composer = new Composer();
@@ -14,7 +14,13 @@ composer.command("start", async (ctx) => {
         "I work in groups and in inline mode too. To move to inline mode, " +
         "just type @mrscdbot in the message box in any chat you want.\n\n" +
         "Inline usage examples:\n\n@mrscdbot [m|mrs|morse] [text to convert to Morse code]\n" +
-        "@mrscdbot [t|txt|text] [Morse code to convert to text]"
+        "@mrscdbot [t|txt|text] [Morse code to convert to text]",
+      {
+        reply_markup: new InlineKeyboard()
+          .url("Morse Code Chat", "http://t.me/MorseCodeChat")
+          .row()
+          .url("Source Code", "http://github.com/rojserbest/mrscd"),
+      }
     );
   else
     await ctx.reply(
