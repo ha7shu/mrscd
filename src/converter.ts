@@ -70,7 +70,7 @@ export const encode = (input: string): string => {
     let toPush: string[] = text[i].split("");
 
     for (const item in toPush) {
-      if (!(toPush[item] in codes)) return toPush[item];
+      if (!(toPush[item] in codes)) return "";
       toPush[item] = codes[toPush[item]];
     }
 
