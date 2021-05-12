@@ -1,11 +1,12 @@
 import { Composer } from "grammy";
+import { encode } from "../converter";
 
 const composer = new Composer();
 
 composer.command("start", async (ctx) => {
   if (ctx.chat.type === "private")
     await ctx.reply(
-      "I can convert text to Morse code " +
+      "Hey there! I can convert text to Morse code " +
         "and vice-verca.\n\n" +
         "You can use me with the following commands:\n\n" +
         "/morse - convert the given text to Morse code\n" +
@@ -15,7 +16,10 @@ composer.command("start", async (ctx) => {
         "Inline usage examples:\n\n@mrscdbot [m|mrs|morse] [text to convert to Morse code]\n" +
         "@mrscdbot [t|txt|text] [Morse code to convert to text]"
     );
-  else await ctx.reply("....   .   -.--      /      -.--   ---   ..-   -.-.--");
+  else
+    await ctx.reply(
+      `....   .   -.--      /      ${encode(ctx.from?.first_name || "you")}`
+    );
 });
 
 export default composer;
